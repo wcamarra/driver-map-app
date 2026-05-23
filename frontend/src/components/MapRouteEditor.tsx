@@ -6,13 +6,13 @@ import { mapsApi } from '../api/routes';
 const mapContainerStyle = { width: '100%', height: '100%' };
 const defaultCenter = { lat: 35.5951, lng: -82.5515 };
 
-const mapOptions: google.maps.MapOptions = {
+const mapOptions = {
   disableDefaultUI: false,
   zoomControl: true,
   mapTypeControl: false,
   streetViewControl: false,
   fullscreenControl: true,
-  gestureHandling: 'greedy',
+  gestureHandling: 'greedy' as const,
 };
 
 interface MapRouteEditorProps {

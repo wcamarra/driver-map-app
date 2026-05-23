@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useEffect, useState, type FormEvent } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { routesApi, socialApi } from '../api/routes';
 import { MapRouteEditor } from '../components/MapRouteEditor';
