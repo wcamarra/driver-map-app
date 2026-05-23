@@ -34,7 +34,8 @@ export async function api<T>(
     let detail = res.statusText;
     try {
       const body = await res.json();
-      detail = body.detail ?? (typeof body.detail === 'string' ? body.detail : JSON.stringify(body));
+      const d = body.detail;
+      detail = typeof d === 'string' ? d : Array.isArray(d) ? d.map((x: { msg?: string }) => x.msg).join(', ') : JSON.stringify(body);
     } catch {
       /* ignore */
     }

@@ -53,10 +53,10 @@ export const socialApi = {
   rate: (routeId: number, body: { stars: number; fun?: number; scenery?: number; road_quality?: number }) =>
     api<Rating>(`/api/routes/${routeId}/ratings`, { method: 'POST', body: JSON.stringify(body) }),
   comments: (routeId: number) => api<Comment[]>(`/api/routes/${routeId}/comments`),
-  addComment: (routeId: number, body: string) =>
+  addComment: (routeId: number, text: string) =>
     api<Comment>(`/api/routes/${routeId}/comments`, {
       method: 'POST',
-      body: JSON.stringify({ body }),
+      body: JSON.stringify({ body: text }),
     }),
   save: (routeId: number) =>
     api<{ saved: boolean }>(`/api/routes/${routeId}/save`, { method: 'POST' }),
