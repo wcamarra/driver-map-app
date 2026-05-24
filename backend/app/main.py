@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy import text
 
-from app.api import auth, maps, routes, social
+from app.api import auth, generate, maps, routes, social
 from app.config import settings
 from app.database import Base, engine
 
@@ -35,6 +35,7 @@ app.add_middleware(
 
 app.include_router(auth.router, prefix="/api")
 app.include_router(maps.router, prefix="/api")
+app.include_router(generate.router, prefix="/api")
 app.include_router(routes.router, prefix="/api")
 app.include_router(social.router, prefix="/api")
 

@@ -19,10 +19,14 @@ Driving enthusiast route sharing — create scenic and fun routes on a map, shar
 cp .env.example .env
 ```
 
-Edit `.env`:
+Edit `.env` at the **repo root** (one file for backend + frontend):
 
 - `GOOGLE_MAPS_API_KEY` — server key (Directions, Places, Geocoding)
 - `VITE_GOOGLE_MAPS_API_KEY` — browser key (Maps JavaScript API), HTTP referrer–restricted
+
+Restart **both** `npm run dev` and the API after changing `.env` — env vars are only read at startup.
+
+The single repo-root `.env` is used by the frontend (Vite), backend (FastAPI), and Docker Compose.
 
 ### 2. Database
 
@@ -68,6 +72,7 @@ docker compose up
 | POST | `/api/auth/register` | Create account |
 | POST | `/api/auth/login` | Get JWT |
 | GET | `/api/routes/feed` | Public routes |
+| POST | `/api/routes/generate` | Generate route from OSM (scenic/twisty/relaxed) |
 | POST | `/api/routes` | Create draft |
 | PATCH | `/api/routes/{id}` | Update metadata & stops |
 | POST | `/api/routes/{id}/build` | Build geometry via Directions |
@@ -98,6 +103,8 @@ python -m app.workers.route_generator
 ```
 
 Uses OpenStreetMap via `osmnx` to score and walk road edges. Requires network on first run.
+
+**OSM cache (“dump”):** OSMnx downloads road data from the Overpass API and caches raw responses on disk (not a single dump file you import). Default folder is `./cache` relative to the API process working directory (usually `backend/cache/` if you run uvicorn from `backend/`). Configure with `ox.settings.cache_folder` in code or delete that folder to force a re-download.
 
 ## Project layout
 

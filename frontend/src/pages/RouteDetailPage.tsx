@@ -23,6 +23,9 @@ export function RouteDetailPage() {
   const [route, setRoute] = useState<RouteDetail | null>(null);
   const [comments, setComments] = useState<Comment[]>([]);
   const [stars, setStars] = useState(5);
+  const [fun, setFun] = useState(4);
+  const [scenery, setScenery] = useState(4);
+  const [roadQuality, setRoadQuality] = useState(4);
   const [commentText, setCommentText] = useState('');
   const [message, setMessage] = useState('');
 
@@ -42,7 +45,7 @@ export function RouteDetailPage() {
 
   const rate = async () => {
     if (!route || !user) return;
-    await socialApi.rate(route.id, { stars });
+    await socialApi.rate(route.id, { stars, fun, scenery, road_quality: roadQuality });
     setMessage('Rating saved');
     load();
   };
@@ -128,11 +131,41 @@ export function RouteDetailPage() {
           {user ? (
             <div className="rate-box">
               <label>
-                Your rating
+                Overall
                 <select value={stars} onChange={(e) => setStars(Number(e.target.value))}>
                   {[5, 4, 3, 2, 1].map((n) => (
                     <option key={n} value={n}>
                       {n} stars
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Fun
+                <select value={fun} onChange={(e) => setFun(Number(e.target.value))}>
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Scenery
+                <select value={scenery} onChange={(e) => setScenery(Number(e.target.value))}>
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <label>
+                Road quality
+                <select value={roadQuality} onChange={(e) => setRoadQuality(Number(e.target.value))}>
+                  {[5, 4, 3, 2, 1].map((n) => (
+                    <option key={n} value={n}>
+                      {n}
                     </option>
                   ))}
                 </select>

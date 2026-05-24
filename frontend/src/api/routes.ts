@@ -47,6 +47,17 @@ export const routesApi = {
   publish: (id: number) =>
     api<RouteDetail>(`/api/routes/${id}/publish`, { method: 'POST' }),
   fork: (id: number) => api<RouteDetail>(`/api/routes/${id}/fork`, { method: 'POST' }),
+  generate: (body: {
+    center_lat: number;
+    center_lng: number;
+    profile: 'scenic' | 'twisty' | 'relaxed';
+    duration_minutes?: number;
+    target_distance_m?: number;
+    near_lat?: number;
+    near_lng?: number;
+    region?: string;
+    title?: string;
+  }) => api<RouteDetail>('/api/routes/generate', { method: 'POST', body: JSON.stringify(body) }),
 };
 
 export const socialApi = {

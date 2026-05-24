@@ -19,6 +19,7 @@ export function EditorPage() {
   const [region, setRegion] = useState('');
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState('');
+  const [visibility, setVisibility] = useState('draft');
   const [status, setStatus] = useState('');
   const [saving, setSaving] = useState(false);
 
@@ -31,6 +32,7 @@ export function EditorPage() {
         setDescription(r.description ?? '');
         setRegion(r.region ?? '');
         setTags(r.tags);
+        setVisibility(r.visibility);
         setStops(r.stops);
         setPolyline(r.polyline);
       });
@@ -59,6 +61,7 @@ export function EditorPage() {
         description: description || undefined,
         region: region || undefined,
         tags,
+        visibility,
         stops: stops.map((s, i) => ({
           sequence: i,
           lat: s.lat,
@@ -164,6 +167,14 @@ export function EditorPage() {
           value={region}
           onChange={(e) => setRegion(e.target.value)}
         />
+        <label className="visibility-row">
+          Visibility
+          <select value={visibility} onChange={(e) => setVisibility(e.target.value)}>
+            <option value="draft">Draft — only you</option>
+            <option value="unlisted">Unlisted — link only</option>
+            <option value="public">Public — discoverable after publish</option>
+          </select>
+        </label>
         <div className="tag-picker">
           {TAG_OPTIONS.map((t) => (
             <button

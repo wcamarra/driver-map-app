@@ -28,9 +28,14 @@ export function HomePage() {
       <section className="hero">
         <h1>Find your next great drive</h1>
         <p>Scenic backroads, twisty favorites, and day-trip routes shared by driving enthusiasts.</p>
-        <Link to="/editor" className="btn btn-primary btn-lg">
-          Create a route
-        </Link>
+        <div className="hero-actions">
+          <Link to="/editor" className="btn btn-primary btn-lg">
+            Create a route
+          </Link>
+          <Link to="/generate" className="btn btn-secondary btn-lg">
+            Generate a route
+          </Link>
+        </div>
       </section>
 
       <section className="filters">

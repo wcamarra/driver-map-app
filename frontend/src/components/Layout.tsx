@@ -17,6 +17,9 @@ export function Layout() {
           </Link>
           {user && (
             <>
+              <Link to="/generate" className={location.pathname === '/generate' ? 'active' : ''}>
+                Generate
+              </Link>
               <Link to="/editor" className={location.pathname.startsWith('/editor') ? 'active' : ''}>
                 Create
               </Link>
